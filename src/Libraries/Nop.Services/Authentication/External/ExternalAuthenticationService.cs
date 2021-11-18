@@ -8,6 +8,7 @@ using Nop.Core;
 using Nop.Core.Domain.Customers;
 using Nop.Core.Domain.Localization;
 using Nop.Core.Events;
+using Nop.Core.Http.Extensions;
 using Nop.Data;
 using Nop.Services.Common;
 using Nop.Services.Customers;
@@ -218,8 +219,16 @@ namespace Nop.Services.Authentication.External
         /// <returns>Result of an authentication</returns>
         protected virtual IActionResult ErrorAuthentication(IEnumerable<string> errors, string returnUrl)
         {
-            foreach (var error in errors)
-                _httpContextAccessor.HttpContext?.Session.AddErrorsToDisplay(error);
+            var session = _httpContextAccessor.HttpContext?.Session;
+
+            if (session != null)
+            {
+                var existsErrors = session.Get<IList<string>>(NopAuthenticationDefaults.ExternalAuthenticationErrorsSessionKey)?.ToList() ?? new List<string>();
+
+                existsErrors.AddRange(errors);
+
+                session.Set(NopAuthenticationDefaults.ExternalAuthenticationErrorsSessionKey, existsErrors);
+            }
 
             return new RedirectToActionResult("Login", "Customer", !string.IsNullOrEmpty(returnUrl) ? new { ReturnUrl = returnUrl } : null);
         }
