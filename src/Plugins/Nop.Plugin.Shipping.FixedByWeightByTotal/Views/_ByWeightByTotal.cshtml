@@ -15,7 +15,7 @@
     var hideSearchBlock = await genericAttributeService.GetAttributeAsync<bool>(await workContext.GetCurrentCustomerAsync(), hideSearchBlockAttributeName);
 }
 
-<script type="text/javascript" asp-location="Footer">
+<script asp-location="Footer">
     $(document).ready(function () {
         $("#@Html.IdFor(model => model.SearchCountryId)").change(function () {
             var selectedItem = $(this).val();

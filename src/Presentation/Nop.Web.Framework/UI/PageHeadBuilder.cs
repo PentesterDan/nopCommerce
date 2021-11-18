@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.Extensions.Hosting;
 using Nop.Core;
 using Nop.Core.Domain.Seo;
+using WebOptimizer;
 
 namespace Nop.Web.Framework.UI
 {
@@ -19,6 +20,7 @@ namespace Nop.Web.Framework.UI
         #region Fields
 
         private readonly IActionContextAccessor _actionContextAccessor;
+        private readonly IAssetPipeline _assetPipeline;
         private readonly IUrlHelperFactory _urlHelperFactory;
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly SeoSettings _seoSettings;
@@ -39,11 +41,13 @@ namespace Nop.Web.Framework.UI
         #region Ctor
 
         public PageHeadBuilder(IActionContextAccessor actionContextAccessor,
+            IAssetPipeline assetPipeline,
             IUrlHelperFactory urlHelperFactory,
             IWebHostEnvironment webHostEnvironment,
             SeoSettings seoSettings)
         {
             _actionContextAccessor = actionContextAccessor;
+            _assetPipeline = assetPipeline;
             _urlHelperFactory = urlHelperFactory;
             _webHostEnvironment = webHostEnvironment;
             _seoSettings = seoSettings;
@@ -210,6 +214,12 @@ namespace Nop.Web.Framework.UI
             if (string.IsNullOrEmpty(src))
                 return;
 
+            if (_assetPipeline.TryGetAssetFromRoute(src, out var asset))
+            {
+                var hash = asset.GenerateCacheKey(_actionContextAccessor.ActionContext.HttpContext);
+                src = $"{asset.Route}?v={hash}";
+            }
+
             if (string.IsNullOrEmpty(debugSrc))
                 debugSrc = src;
 
@@ -234,6 +244,12 @@ namespace Nop.Web.Framework.UI
 
             if (string.IsNullOrEmpty(src))
                 return;
+
+            if (_assetPipeline.TryGetAssetFromRoute(src, out var asset))
+            {
+                var hash = asset.GenerateCacheKey(_actionContextAccessor.ActionContext.HttpContext);
+                src = $"{asset.Route}?v={hash}";
+            }
 
             if (string.IsNullOrEmpty(debugSrc))
                 debugSrc = src;
@@ -292,6 +308,7 @@ namespace Nop.Web.Framework.UI
 
             _inlineScriptParts[location].Add(script);
         }
+
         /// <summary>
         /// Append inline script element
         /// </summary>
@@ -346,6 +363,12 @@ namespace Nop.Web.Framework.UI
             if (string.IsNullOrEmpty(src))
                 return;
 
+            if (_assetPipeline.TryGetAssetFromRoute(src, out var asset))
+            {
+                var hash = asset.GenerateCacheKey(_actionContextAccessor.ActionContext.HttpContext);
+                src = $"{asset.Route}?v={hash}";
+            }
+
             if (string.IsNullOrEmpty(debugSrc))
                 debugSrc = src;
 
@@ -368,6 +391,13 @@ namespace Nop.Web.Framework.UI
 
             if (string.IsNullOrEmpty(src))
                 return;
+
+            if (_assetPipeline.TryGetAssetFromRoute(src, out var asset))
+            {
+                var hash = asset.GenerateCacheKey(_actionContextAccessor.ActionContext.HttpContext);
+                src = $"{asset.Route}?v={hash}";
+            }
+
 
             if (string.IsNullOrEmpty(debugSrc))
                 debugSrc = src;

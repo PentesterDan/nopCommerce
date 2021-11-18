@@ -20,7 +20,6 @@
 
     @* CSS & Script resources *@
     @{ await Html.RenderPartialAsync("_AdminScripts");  }
-    
 </head>
 <body class="hold-transition skin-blue sidebar-collapse layout-fixed">
     <div class="wrapper">
@@ -32,8 +31,11 @@
             </div>
         </div>
     </div>
+
     <script-bundle />
+    @Html.NopScripts(ResourceLocation.Footer)
     @Html.NopInlineScripts(ResourceLocation.Footer)
+
     <script>
         $(document).ready(function () {
             //enable tooltips

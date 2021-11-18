@@ -73,9 +73,11 @@ namespace Nop.Web.Framework.TagHelpers.Shared
                 BundleDestinationKey ??= bundleSuffix;
             else
                 BundleKey ??= bundleSuffix;
+            
+            var config = _appSettings.Get<WebOptimizerConfig>();
 
-            if (!ExcludeFromBundle)
-                output.HandleJsBundle(_assetPipeline, ViewContext, _appSettings.Get<WebOptimizerConfig>(), Src, BundleKey, BundleDestinationKey);
+            if (!ExcludeFromBundle && config.EnableJsBundling)
+                output.HandleJsBundle(_assetPipeline, ViewContext, config, Src, BundleKey, BundleDestinationKey);
             else
                 output.Attributes.SetAttribute("src", Src);
 
@@ -86,6 +88,9 @@ namespace Nop.Web.Framework.TagHelpers.Shared
 
         #region Properties
 
+        /// <summary>
+        /// A value indicating if a file should be excluded from the bundle
+        /// </summary>
         [HtmlAttributeName(EXCLUDE_FROM_BUNDLE_ATTRIBUTE_NAME)]
         public bool ExcludeFromBundle { get; set; }
 
@@ -97,17 +102,20 @@ namespace Nop.Web.Framework.TagHelpers.Shared
         public ViewContext ViewContext { get; set; } = default;
 
         /// <summary>
-        ///
+        /// A key of a bundle to collect
         /// </summary>
         [HtmlAttributeName(BUNDLE_KEY_NAME)]
         public string BundleKey { get; set; }
 
         /// <summary>
-        ///
+        /// A key that defines the destination for the bundle.
         /// </summary>
         [HtmlAttributeName(BUNDLE_DESTINATION_KEY_NAME)]
         public string BundleDestinationKey { get; set; }
 
+        /// <summary>
+        /// Address of the external script to use
+        /// </summary>
         [HtmlAttributeName(SRC_ATTRIBUTE_NAME)]
         public string Src { get; set; }
 

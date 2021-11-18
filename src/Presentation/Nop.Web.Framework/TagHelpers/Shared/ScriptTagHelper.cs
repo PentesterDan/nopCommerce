@@ -64,27 +64,33 @@ namespace Nop.Web.Framework.TagHelpers.Shared
             var childContent = await output.GetChildContentAsync();
             var script = childContent.GetContent();
 
-            output.Attributes.RemoveAll(SRC_ATTRIBUTE_NAME);
-
-            if (!string.IsNullOrEmpty(DebugSrc) && _webHostEnvironment.IsDevelopment())
-                output.Attributes.SetAttribute(SRC_ATTRIBUTE_NAME, DebugSrc);
-            else if (!string.IsNullOrEmpty(Src))
-                output.Attributes.SetAttribute(SRC_ATTRIBUTE_NAME, Src.TrimStart('~'));
 
             var scriptTag = new TagBuilder(SCRIPT_TAG_NAME);
 
             if (!string.IsNullOrEmpty(script))
                 scriptTag.InnerHtml.SetHtmlContent(new HtmlString(script));
 
-            scriptTag.MergeAttributes(await output.GetAttributeDictionaryAsync());
+            var src = !string.IsNullOrEmpty(DebugSrc) && _webHostEnvironment.IsDevelopment() ? DebugSrc : Src;
+
+            if(!string.IsNullOrEmpty(src))
+                scriptTag.Attributes.Add(SRC_ATTRIBUTE_NAME, src.TrimStart('~'));
+
+            scriptTag.MergeAttributes(await output.GetAttributeDictionaryAsync(), replaceExisting: false);
+
             output.SuppressOutput();
 
             var tagHtml = await scriptTag.RenderHtmlContentAsync();
 
             if (Location == ResourceLocation.None)
+            {
                 output.PostElement.AppendHtml(tagHtml + Environment.NewLine);
-            else
+                return;
+            }
+
+            if (string.IsNullOrEmpty(Src))
                 _htmlHelper.AddInlineScriptParts(Location, tagHtml);
+            else
+                _htmlHelper.AddScriptParts(Location, Src, DebugSrc);
         }
 
         #endregion

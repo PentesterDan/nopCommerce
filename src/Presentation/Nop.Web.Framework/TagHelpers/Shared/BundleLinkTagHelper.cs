@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
+using Nop.Core;
 using Nop.Core.Configuration;
 using Nop.Web.Framework.Configuration;
 using WebOptimizer;
@@ -56,7 +57,7 @@ namespace Nop.Web.Framework.TagHelpers.Shared
                 throw new ArgumentNullException(nameof(output));
 
             output.TagName = ASSET_TAG_NAME;
-            output.Attributes.SetAttribute("type", "text/css");
+            output.Attributes.SetAttribute("type", MimeTypes.TextCss);
             output.Attributes.SetAttribute("rel", "stylesheet");
             output.TagMode = TagMode.SelfClosing;
 
@@ -71,8 +72,10 @@ namespace Nop.Web.Framework.TagHelpers.Shared
             else
                 BundleKey ??= bundleSuffix;
 
-            if (!ExcludeFromBundle)
-                output.HandleCssBundle(_assetPipeline, ViewContext, _appSettings.Get<WebOptimizerConfig>(), Href, BundleKey, BundleDestinationKey);
+            var config = _appSettings.Get<WebOptimizerConfig>();
+
+            if (!ExcludeFromBundle && config.EnableCssBundling)
+                output.HandleCssBundle(_assetPipeline, ViewContext, config, Href, BundleKey, BundleDestinationKey);
             else
                 output.Attributes.SetAttribute("href", Href);
 
@@ -83,21 +86,27 @@ namespace Nop.Web.Framework.TagHelpers.Shared
 
         #region Properties
 
+        /// <summary>
+        /// A value indicating if a file should be excluded from the bundle
+        /// </summary>
         [HtmlAttributeName(EXCLUDE_FROM_BUNDLE_ATTRIBUTE_NAME)]
         public bool ExcludeFromBundle { get; set; }
 
         /// <summary>
-        ///
+        /// A key of a bundle to collect
         /// </summary>
         [HtmlAttributeName(BUNDLE_KEY_NAME)]
         public string BundleKey { get; set; }
 
         /// <summary>
-        ///
+        /// A key that defines the destination for the bundle.
         /// </summary>
         [HtmlAttributeName(BUNDLE_DESTINATION_KEY_NAME)]
         public string BundleDestinationKey { get; set; }
 
+        /// <summary>
+        /// Address of the linked resource
+        /// </summary>
         [HtmlAttributeName(HREF_ATTRIBUTE_NAME)]
         public string Href { get; set; }
 

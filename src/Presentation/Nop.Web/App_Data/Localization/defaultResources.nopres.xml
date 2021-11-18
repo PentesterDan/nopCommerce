@@ -4606,7 +4606,7 @@
     <Value>Path of the directory where assets will be stored if disk cache is enabled.</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Configuration.AppSettings.WebOptimizer.CssBundleSuffix">
-    <Value>Suffix of styles bundle files</Value>
+    <Value>Suffix of style bundle files</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Configuration.AppSettings.WebOptimizer.CssBundleSuffix.Hint">
     <Value>Enter the key that will be put to the end of the bundle name.</Value>

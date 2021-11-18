@@ -34,10 +34,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     @Html.NopHeadCustom()
     @*This is used so that themes can inject content into the header*@
-    @await Html.PartialAsync("Head")    
-    <style-bundle />
+    @await Html.PartialAsync("Head")
+
     @Html.NopCssFiles(ResourceLocation.Head)
-    @Html.NopScripts(ResourceLocation.Head)
+    <style-bundle />
+
     @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.HeadHtmlTag })
     @Html.NopCanonicalUrls()
     @await Component.InvokeAsync("NewsRssHeaderLink")
@@ -48,34 +49,35 @@
     {
         <mini-profiler />
     }
+    @Html.NopScripts(ResourceLocation.Head)
     @Html.NopInlineScripts(ResourceLocation.Head)
     <!--Powered by nopCommerce - https://www.nopCommerce.com-->
 </head>
 <body>
     @RenderBody()
 
-    <script src="/lib_npm/jquery/jquery.min.js"></script>
+    <script src="~/lib_npm/jquery/jquery.min.js"></script>
     @* when jQuery migrate script logging is active you will see the log in the browser console *@
     @if (commonSettings.JqueryMigrateScriptLoggingActive)
     {
-        <script src="/lib_npm/jquery-migrate/jquery-migrate.js"></script>
+        <script src="~/lib_npm/jquery-migrate/jquery-migrate.js"></script>
     }
     else
     {
-        <script src="/lib_npm/jquery-migrate/jquery-migrate.min.js"></script>
+        <script src="~/lib_npm/jquery-migrate/jquery-migrate.min.js"></script>
     }
-    <script src="/lib_npm/jquery-ui-dist/jquery-ui.min.js"></script>
-    <script src="/lib_npm/jquery-validation/jquery.validate.min.js"></script>
-    <script src="/lib_npm/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
-    
+    <script src="~/lib_npm/jquery-ui-dist/jquery-ui.min.js"></script>
+    <script src="~/lib_npm/jquery-validation/jquery.validate.min.js"></script>
+    <script src="~/lib_npm/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
 
     <script src="~/js/public.countryselect.js"></script>
-    <script src="/js/public.ajaxcart.js"></script>
-    <script src="/js/public.common.js"></script>
+    <script src="~/js/public.ajaxcart.js"></script>
+    <script src="~/js/public.common.js"></script>
 
+    <!-- FooterScripts  -->
     <script-bundle />
 
-    <!-- FooterSctipts  -->    
     @Html.NopScripts(ResourceLocation.Footer)
     @Html.NopInlineScripts(ResourceLocation.Footer)
 </body>

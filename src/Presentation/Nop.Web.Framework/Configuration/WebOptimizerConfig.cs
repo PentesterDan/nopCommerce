@@ -44,6 +44,12 @@ namespace Nop.Web.Framework.Configuration
         [JsonIgnore]
         public string Name => "WebOptimizer";
 
+        /// <summary>
+        /// Gets an order of configuration
+        /// </summary>
+        /// <returns>Order</returns>
+        public int GetOrder() => 2;
+
         #endregion
     }
 }
