@@ -15,7 +15,7 @@ namespace Nop.Services.Vendors
     {
         #region Fields
 
-        private readonly IHtmlHelper _htmlHelper;
+        private readonly INopHtmlHelper _htmlHelper;
         private readonly ILocalizationService _localizationService;
         private readonly IVendorAttributeParser _vendorAttributeParser;
         private readonly IVendorAttributeService _vendorAttributeService;
@@ -25,7 +25,7 @@ namespace Nop.Services.Vendors
 
         #region Ctor
 
-        public VendorAttributeFormatter(IHtmlHelper htmlHelper,
+        public VendorAttributeFormatter(INopHtmlHelper htmlHelper,
             ILocalizationService localizationService,
             IVendorAttributeParser vendorAttributeParser,
             IVendorAttributeService vendorAttributeService,

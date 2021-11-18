@@ -50,7 +50,7 @@ namespace Nop.Services.Common
         private readonly ICurrencyService _currencyService;
         private readonly IDateTimeHelper _dateTimeHelper;
         private readonly IGiftCardService _giftCardService;
-        private readonly IHtmlHelper _htmlHelper;
+        private readonly INopHtmlHelper _htmlHelper;
         private readonly ILanguageService _languageService;
         private readonly ILocalizationService _localizationService;
         private readonly IMeasureService _measureService;
@@ -87,7 +87,7 @@ namespace Nop.Services.Common
             ICurrencyService currencyService,
             IDateTimeHelper dateTimeHelper,
             IGiftCardService giftCardService,
-            IHtmlHelper htmlHelper,
+            INopHtmlHelper htmlHelper,
             ILanguageService languageService,
             ILocalizationService localizationService,
             IMeasureService measureService,

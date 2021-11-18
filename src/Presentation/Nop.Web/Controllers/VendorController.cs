@@ -33,7 +33,7 @@ namespace Nop.Web.Controllers
         private readonly ICustomerService _customerService;
         private readonly IDownloadService _downloadService;
         private readonly IGenericAttributeService _genericAttributeService;
-        private readonly IHtmlHelper _htmlHelper;
+        private readonly INopHtmlHelper _htmlHelper;
         private readonly ILocalizationService _localizationService;
         private readonly IPictureService _pictureService;
         private readonly IUrlRecordService _urlRecordService;
@@ -54,7 +54,7 @@ namespace Nop.Web.Controllers
             ICustomerService customerService,
             IDownloadService downloadService,
             IGenericAttributeService genericAttributeService,
-            IHtmlHelper htmlHelper,
+            INopHtmlHelper htmlHelper,
             ILocalizationService localizationService,
             IPictureService pictureService,
             IUrlRecordService urlRecordService,

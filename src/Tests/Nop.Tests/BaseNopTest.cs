@@ -84,7 +84,6 @@ using Nop.Web.Framework.Themes;
 using Nop.Web.Framework.UI;
 using Nop.Web.Infrastructure.Installation;
 using SkiaSharp;
-using HtmlHelper = Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper;
 using IAuthenticationService = Nop.Services.Authentication.IAuthenticationService;
 using Task = System.Threading.Tasks.Task;
 
@@ -333,7 +332,7 @@ namespace Nop.Tests
             services.AddTransient<IThemeProvider, ThemeProvider>();
             services.AddTransient<IExternalAuthenticationService, ExternalAuthenticationService>();
             services.AddScoped<IBBCodeHelper, BBCodeHelper>();
-            services.AddScoped<IHtmlHelper, Services.Html.HtmlHelper>();
+            services.AddScoped<INopHtmlHelper, Services.Html.NopHtmlHelper>();
 
             //slug route transformer
             services.AddSingleton<IReviewTypeService, ReviewTypeService>();

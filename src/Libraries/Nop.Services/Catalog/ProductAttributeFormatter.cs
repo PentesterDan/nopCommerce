@@ -23,7 +23,7 @@ namespace Nop.Services.Catalog
 
         private readonly ICurrencyService _currencyService;
         private readonly IDownloadService _downloadService;
-        private readonly IHtmlHelper _htmlHelper;
+        private readonly INopHtmlHelper _htmlHelper;
         private readonly ILocalizationService _localizationService;
         private readonly IPriceCalculationService _priceCalculationService;
         private readonly IPriceFormatter _priceFormatter;
@@ -40,7 +40,7 @@ namespace Nop.Services.Catalog
 
         public ProductAttributeFormatter(ICurrencyService currencyService,
             IDownloadService downloadService,
-            IHtmlHelper htmlHelper,
+            INopHtmlHelper htmlHelper,
             ILocalizationService localizationService,
             IPriceCalculationService priceCalculationService,
             IPriceFormatter priceFormatter,

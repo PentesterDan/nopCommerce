@@ -23,7 +23,7 @@ namespace Nop.Web.Areas.Admin.Factories
         private readonly IBaseAdminModelFactory _baseAdminModelFactory;
         private readonly ICustomerService _customerService;
         private readonly IDateTimeHelper _dateTimeHelper;
-        private readonly IHtmlHelper _htmlHelper;
+        private readonly INopHtmlHelper _htmlHelper;
         private readonly ILocalizationService _localizationService;
         private readonly ILogger _logger;
 
@@ -34,7 +34,7 @@ namespace Nop.Web.Areas.Admin.Factories
         public LogModelFactory(IBaseAdminModelFactory baseAdminModelFactory,
             ICustomerService customerService,
             IDateTimeHelper dateTimeHelper,
-            IHtmlHelper htmlHelper,
+            INopHtmlHelper htmlHelper,
             ILocalizationService localizationService,
             ILogger logger)
         {

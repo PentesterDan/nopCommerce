@@ -17,7 +17,7 @@ namespace Nop.Services.Common
 
         private readonly IAddressAttributeParser _addressAttributeParser;
         private readonly IAddressAttributeService _addressAttributeService;
-        private readonly IHtmlHelper _htmlHelper;
+        private readonly INopHtmlHelper _htmlHelper;
         private readonly ILocalizationService _localizationService;
         private readonly IWorkContext _workContext;
 
@@ -27,7 +27,7 @@ namespace Nop.Services.Common
 
         public AddressAttributeFormatter(IAddressAttributeParser addressAttributeParser,
             IAddressAttributeService addressAttributeService,
-            IHtmlHelper htmlHelper,
+            INopHtmlHelper htmlHelper,
             ILocalizationService localizationService,
             IWorkContext workContext)
         {

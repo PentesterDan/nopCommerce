@@ -68,7 +68,7 @@ namespace Nop.Services.Messages
         private readonly IEventPublisher _eventPublisher;
         private readonly IGenericAttributeService _genericAttributeService;
         private readonly IGiftCardService _giftCardService;
-        private readonly IHtmlHelper _htmlHelper;
+        private readonly INopHtmlHelper _htmlHelper;
         private readonly ILanguageService _languageService;
         private readonly ILocalizationService _localizationService;
         private readonly INewsService _newsService;
@@ -111,7 +111,7 @@ namespace Nop.Services.Messages
             IEventPublisher eventPublisher,
             IGenericAttributeService genericAttributeService,
             IGiftCardService giftCardService,
-            IHtmlHelper htmlHelper,
+            INopHtmlHelper htmlHelper,
             ILanguageService languageService,
             ILocalizationService localizationService,
             INewsService newsService,

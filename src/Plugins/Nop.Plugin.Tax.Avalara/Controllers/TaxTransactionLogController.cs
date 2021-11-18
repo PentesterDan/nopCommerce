@@ -22,7 +22,7 @@ namespace Nop.Plugin.Tax.Avalara.Controllers
 
         private readonly ICustomerService _customerService;
         private readonly IDateTimeHelper _dateTimeHelper;
-        private readonly IHtmlHelper _htmlHelper;
+        private readonly INopHtmlHelper _htmlHelper;
         private readonly ILocalizationService _localizationService;
         private readonly INotificationService _notificationService;
         private readonly IPermissionService _permissionService;
@@ -34,7 +34,7 @@ namespace Nop.Plugin.Tax.Avalara.Controllers
 
         public TaxTransactionLogController(ICustomerService customerService,
             IDateTimeHelper dateTimeHelper,
-            IHtmlHelper htmlHelper,
+            INopHtmlHelper htmlHelper,
             ILocalizationService localizationService,
             INotificationService notificationService,
             IPermissionService permissionService,

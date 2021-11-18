@@ -8,13 +8,13 @@ using Nop.Core.Domain.Customers;
 using Nop.Services.Catalog;
 using Nop.Services.Customers;
 using Nop.Services.Helpers;
+using Nop.Services.Html;
 using Nop.Services.Localization;
 using Nop.Services.Stores;
 using Nop.Web.Areas.Admin.Infrastructure.Mapper.Extensions;
 using Nop.Web.Areas.Admin.Models.Catalog;
 using Nop.Web.Framework.Extensions;
 using Nop.Web.Framework.Models.Extensions;
-using IHtmlHelper = Nop.Services.Html.IHtmlHelper;
 
 namespace Nop.Web.Areas.Admin.Factories
 {
@@ -29,7 +29,7 @@ namespace Nop.Web.Areas.Admin.Factories
         private readonly IBaseAdminModelFactory _baseAdminModelFactory;
         private readonly ICustomerService _customerService;
         private readonly IDateTimeHelper _dateTimeHelper;
-        private readonly IHtmlHelper _htmlHelper;
+        private readonly INopHtmlHelper _htmlHelper;
         private readonly ILocalizationService _localizationService;
         private readonly IProductService _productService;
         private readonly IReviewTypeService _reviewTypeService;
@@ -44,7 +44,7 @@ namespace Nop.Web.Areas.Admin.Factories
             IBaseAdminModelFactory baseAdminModelFactory,
             ICustomerService customerService,
             IDateTimeHelper dateTimeHelper,
-            IHtmlHelper htmlHelper,
+            INopHtmlHelper htmlHelper,
             ILocalizationService localizationService,
             IProductService productService,
             IReviewTypeService reviewTypeService,

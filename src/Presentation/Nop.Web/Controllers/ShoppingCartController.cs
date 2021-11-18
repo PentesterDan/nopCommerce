@@ -56,7 +56,7 @@ namespace Nop.Web.Controllers
         private readonly IDownloadService _downloadService;
         private readonly IGenericAttributeService _genericAttributeService;
         private readonly IGiftCardService _giftCardService;
-        private readonly IHtmlHelper _htmlHelper;
+        private readonly INopHtmlHelper _htmlHelper;
         private readonly ILocalizationService _localizationService;
         private readonly INopFileProvider _fileProvider;
         private readonly INotificationService _notificationService;
@@ -96,7 +96,7 @@ namespace Nop.Web.Controllers
             IDownloadService downloadService,
             IGenericAttributeService genericAttributeService,
             IGiftCardService giftCardService,
-            IHtmlHelper htmlHelper,
+            INopHtmlHelper htmlHelper,
             ILocalizationService localizationService,
             INopFileProvider fileProvider,
             INotificationService notificationService,

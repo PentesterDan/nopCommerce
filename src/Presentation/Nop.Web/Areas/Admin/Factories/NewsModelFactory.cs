@@ -7,6 +7,7 @@ using Nop.Core.Domain.Customers;
 using Nop.Core.Domain.News;
 using Nop.Services.Customers;
 using Nop.Services.Helpers;
+using Nop.Services.Html;
 using Nop.Services.Localization;
 using Nop.Services.News;
 using Nop.Services.Seo;
@@ -16,7 +17,6 @@ using Nop.Web.Areas.Admin.Models.News;
 using Nop.Web.Framework.Extensions;
 using Nop.Web.Framework.Factories;
 using Nop.Web.Framework.Models.Extensions;
-using IHtmlHelper = Nop.Services.Html.IHtmlHelper;
 
 namespace Nop.Web.Areas.Admin.Factories
 {
@@ -31,7 +31,7 @@ namespace Nop.Web.Areas.Admin.Factories
         private readonly IBaseAdminModelFactory _baseAdminModelFactory;
         private readonly ICustomerService _customerService;
         private readonly IDateTimeHelper _dateTimeHelper;
-        private readonly IHtmlHelper _htmlHelper;
+        private readonly INopHtmlHelper _htmlHelper;
         private readonly ILanguageService _languageService;
         private readonly ILocalizationService _localizationService;
         private readonly INewsService _newsService;
@@ -47,7 +47,7 @@ namespace Nop.Web.Areas.Admin.Factories
             IBaseAdminModelFactory baseAdminModelFactory,
             ICustomerService customerService,
             IDateTimeHelper dateTimeHelper,
-            IHtmlHelper htmlHelper,
+            INopHtmlHelper htmlHelper,
             ILanguageService languageService,
             ILocalizationService localizationService,
             INewsService newsService,

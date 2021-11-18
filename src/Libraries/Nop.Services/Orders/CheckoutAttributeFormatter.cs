@@ -25,7 +25,7 @@ namespace Nop.Services.Orders
         private readonly ICheckoutAttributeService _checkoutAttributeService;
         private readonly ICurrencyService _currencyService;
         private readonly IDownloadService _downloadService;
-        private readonly IHtmlHelper _htmlHelper;
+        private readonly INopHtmlHelper _htmlHelper;
         private readonly ILocalizationService _localizationService;
         private readonly IPriceFormatter _priceFormatter;
         private readonly ITaxService _taxService;
@@ -40,7 +40,7 @@ namespace Nop.Services.Orders
             ICheckoutAttributeService checkoutAttributeService,
             ICurrencyService currencyService,
             IDownloadService downloadService,
-            IHtmlHelper htmlHelper,
+            INopHtmlHelper htmlHelper,
             ILocalizationService localizationService,
             IPriceFormatter priceFormatter,
             ITaxService taxService,

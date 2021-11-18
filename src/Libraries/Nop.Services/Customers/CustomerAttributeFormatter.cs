@@ -17,7 +17,7 @@ namespace Nop.Services.Customers
 
         private readonly ICustomerAttributeParser _customerAttributeParser;
         private readonly ICustomerAttributeService _customerAttributeService;
-        private readonly IHtmlHelper _htmlHelper;
+        private readonly INopHtmlHelper _htmlHelper;
         private readonly ILocalizationService _localizationService;
         private readonly IWorkContext _workContext;
 
@@ -27,7 +27,7 @@ namespace Nop.Services.Customers
 
         public CustomerAttributeFormatter(ICustomerAttributeParser customerAttributeParser,
             ICustomerAttributeService customerAttributeService,
-            IHtmlHelper htmlHelper,
+            INopHtmlHelper htmlHelper,
             ILocalizationService localizationService,
             IWorkContext workContext)
         {

@@ -24,7 +24,7 @@ namespace Nop.Services.Orders
     {
         #region Fields
 
-        private readonly IHtmlHelper _htmlHelper;
+        private readonly INopHtmlHelper _htmlHelper;
         private readonly IProductService _productService;
         private readonly IRepository<Address> _addressRepository;
         private readonly IRepository<Customer> _customerRepository;
@@ -41,7 +41,7 @@ namespace Nop.Services.Orders
 
         #region Ctor
 
-        public OrderService(IHtmlHelper htmlHelper,
+        public OrderService(INopHtmlHelper htmlHelper,
             IProductService productService,
             IRepository<Address> addressRepository,
             IRepository<Customer> customerRepository,

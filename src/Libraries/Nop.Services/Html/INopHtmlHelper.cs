@@ -1,6 +1,6 @@
 ﻿namespace Nop.Services.Html
 {
-    public interface IHtmlHelper
+    public interface INopHtmlHelper
     {
         /// <summary>
         /// Formats the text
@@ -13,12 +13,12 @@
         /// <param name="resolveLinks">A value indicating whether to resolve links</param>
         /// <param name="addNoFollowTag">A value indicating whether to add "noFollow" tag</param>
         /// <returns>Formatted text</returns>
-        string FormatText(string text, 
+        string FormatText(string text,
             bool stripTags,
-            bool convertPlainTextToHtml, 
+            bool convertPlainTextToHtml,
             bool allowHtml,
-            bool allowBbCode, 
-            bool resolveLinks, 
+            bool allowBbCode,
+            bool resolveLinks,
             bool addNoFollowTag);
 
         /// <summary>
@@ -40,7 +40,7 @@
         /// </summary>
         /// <param name="text">Text</param>
         /// <returns>Formatted text</returns>
-       string ConvertPlainTextToHtml(string text);
+        string ConvertPlainTextToHtml(string text);
 
         /// <summary>
         /// Converts HTML to plain text
@@ -49,7 +49,7 @@
         /// <param name="decode">A value indicating whether to decode text</param>
         /// <param name="replaceAnchorTags">A value indicating whether to replace anchor text (remove a tag from the following URL <a href="http://example.com">Name</a> and output only the string "Name")</param>
         /// <returns>Formatted text</returns>
-       string ConvertHtmlToPlainText(string text,
+        string ConvertHtmlToPlainText(string text,
             bool decode = false,
             bool replaceAnchorTags = false);
     }

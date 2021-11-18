@@ -42,7 +42,7 @@ namespace Nop.Web.Controllers
         private readonly ICustomerActivityService _customerActivityService;
         private readonly ICustomerService _customerService;
         private readonly IEventPublisher _eventPublisher;
-        private readonly IHtmlHelper _htmlHelper;
+        private readonly INopHtmlHelper _htmlHelper;
         private readonly ILocalizationService _localizationService;
         private readonly IOrderService _orderService;
         private readonly IPermissionService _permissionService;
@@ -74,7 +74,7 @@ namespace Nop.Web.Controllers
             ICustomerActivityService customerActivityService,
             ICustomerService customerService,
             IEventPublisher eventPublisher,
-            IHtmlHelper htmlHelper,
+            INopHtmlHelper htmlHelper,
             ILocalizationService localizationService,
             IOrderService orderService,
             IPermissionService permissionService,

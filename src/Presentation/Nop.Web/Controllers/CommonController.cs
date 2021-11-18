@@ -34,7 +34,7 @@ namespace Nop.Web.Controllers
         private readonly ICurrencyService _currencyService;
         private readonly ICustomerActivityService _customerActivityService;
         private readonly IGenericAttributeService _genericAttributeService;
-        private readonly IHtmlHelper _htmlHelper;
+        private readonly INopHtmlHelper _htmlHelper;
         private readonly ILanguageService _languageService;
         private readonly ILocalizationService _localizationService;
         private readonly IStoreContext _storeContext;
@@ -58,7 +58,7 @@ namespace Nop.Web.Controllers
             ICurrencyService currencyService,
             ICustomerActivityService customerActivityService,
             IGenericAttributeService genericAttributeService,
-            IHtmlHelper htmlHelper,
+            INopHtmlHelper htmlHelper,
             ILanguageService languageService,
             ILocalizationService localizationService,
             IStoreContext storeContext,
