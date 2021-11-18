@@ -174,7 +174,7 @@ namespace Nop.Web.Controllers
             //validate permissions
             var dirsToCheck = _fileProvider.GetDirectoriesWrite();
             foreach (var dir in dirsToCheck)
-                if (!FilePermissionHelper.CheckPermissions(_fileProvider, dir, false, true, true, false))
+                if (!_fileProvider.CheckPermissions(dir, false, true, true, false))
                     ModelState.AddModelError(string.Empty, string.Format(_locService.Value.GetResource("ConfigureDirectoryPermissions"), CurrentOSUser.FullName, dir));
 
             var filesToCheck = _fileProvider.GetFilesWrite();
@@ -183,7 +183,7 @@ namespace Nop.Web.Controllers
                 if (!_fileProvider.FileExists(file))
                     continue;
 
-                if (!FilePermissionHelper.CheckPermissions(_fileProvider, file, false, true, true, true))
+                if (!_fileProvider.CheckPermissions(file, false, true, true, true))
                     ModelState.AddModelError(string.Empty, string.Format(_locService.Value.GetResource("ConfigureFilePermissions"), CurrentOSUser.FullName, file));
             }
 

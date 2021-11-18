@@ -543,7 +543,7 @@ namespace Nop.Web.Areas.Admin.Factories
             var dirsToCheck = _fileProvider.GetDirectoriesWrite();
             foreach (var dir in dirsToCheck)
             {
-                if (FilePermissionHelper.CheckPermissions(_fileProvider, dir, false, true, true, false))
+                if (_fileProvider.CheckPermissions(dir, false, true, true, false))
                     continue;
 
                 models.Add(new SystemWarningModel
@@ -568,7 +568,7 @@ namespace Nop.Web.Areas.Admin.Factories
             var filesToCheck = _fileProvider.GetFilesWrite();
             foreach (var file in filesToCheck)
             {
-                if (FilePermissionHelper.CheckPermissions(_fileProvider, file, false, true, true, true))
+                if (_fileProvider.CheckPermissions(file, false, true, true, true))
                     continue;
 
                 models.Add(new SystemWarningModel

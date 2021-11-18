@@ -234,7 +234,7 @@ namespace Nop.Web.Framework.Security
         /// <param name="checkModify">Check modify</param>
         /// <param name="checkDelete">Check delete</param>
         /// <returns>Result</returns>
-        public static bool CheckPermissions(INopFileProvider fileProvider, string path, bool checkRead, bool checkWrite, bool checkModify, bool checkDelete)
+        public static bool CheckPermissions(this INopFileProvider fileProvider, string path, bool checkRead, bool checkWrite, bool checkModify, bool checkDelete)
         {
             var result = false;
 
