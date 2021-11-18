@@ -52,27 +52,27 @@ namespace Nop.Web.Framework.Infrastructure.Extensions
 
         public static void StartEngine(this IApplicationBuilder application)
         {
-            var serviceProvider = application.ApplicationServices;
-            
             //further actions are performed only when the database is installed
             if (DataSettingsManager.IsDatabaseInstalled())
             {
+                var nopEngine = EngineContext.Current;
+
                 //log application start
-                serviceProvider.GetService<ILogger>().InformationAsync("Application started").Wait();
+                nopEngine.Resolve<ILogger>().InformationAsync("Application started").Wait();
 
                 //install and update plugins
-                var pluginService = serviceProvider.GetService<IPluginService>();
+                var pluginService = nopEngine.Resolve<IPluginService>();
                 pluginService.InstallPluginsAsync().Wait();
                 pluginService.UpdatePluginsAsync().Wait();
 
                 //update nopCommerce core and db
-                var migrationManager = serviceProvider.GetService<IMigrationManager>();
+                var migrationManager = nopEngine.Resolve<IMigrationManager>();
                 var assembly = Assembly.GetAssembly(typeof(ApplicationBuilderExtensions));
                 migrationManager.ApplyUpMigrations(assembly, MigrationProcessType.Update);
                 assembly = Assembly.GetAssembly(typeof(IMigrationManager));
                 migrationManager.ApplyUpMigrations(assembly, MigrationProcessType.Update);
 
-                var taskScheduler = serviceProvider.GetService<ITaskScheduler>();
+                var taskScheduler = nopEngine.Resolve<ITaskScheduler>();
                 taskScheduler.InitializeAsync().Wait();
                 taskScheduler.StartScheduler();
             }
@@ -84,10 +84,10 @@ namespace Nop.Web.Framework.Infrastructure.Extensions
         /// <param name="application">Builder for configuring an application's request pipeline</param>
         public static void UseNopExceptionHandler(this IApplicationBuilder application)
         {
-            var serviceProvider = application.ApplicationServices;
+            var nopEngine = EngineContext.Current;
 
-            var appSettings = serviceProvider.GetService<AppSettings>();
-            var webHostEnvironment = serviceProvider.GetService<IWebHostEnvironment>();
+            var appSettings = nopEngine.Resolve<AppSettings>();
+            var webHostEnvironment = nopEngine.Resolve<IWebHostEnvironment>();
             var useDetailedExceptionPage = appSettings.Get<CommonConfig>().DisplayFullErrorStack || webHostEnvironment.IsDevelopment();;
 
             if (useDetailedExceptionPage)
@@ -116,10 +116,10 @@ namespace Nop.Web.Framework.Infrastructure.Extensions
                         if (DataSettingsManager.IsDatabaseInstalled())
                         {
                             //get current customer
-                            var currentCustomer = await serviceProvider.GetService<IWorkContext>().GetCurrentCustomerAsync();
+                            var currentCustomer = await nopEngine.Resolve<IWorkContext>().GetCurrentCustomerAsync();
 
                             //log error
-                            await serviceProvider.GetService<ILogger>().ErrorAsync(exception.Message, exception, currentCustomer);
+                            await nopEngine.Resolve<ILogger>().ErrorAsync(exception.Message, exception, currentCustomer);
                         }
                     }
                     finally
@@ -139,11 +139,11 @@ namespace Nop.Web.Framework.Infrastructure.Extensions
         {
             application.UseStatusCodePages(async context =>
             {
-                var serviceProvider = context.HttpContext.RequestServices;
+                var nopEngine = EngineContext.Current;
                 //handle 404 Not Found
                 if (context.HttpContext.Response.StatusCode == StatusCodes.Status404NotFound)
                 {
-                    var webHelper = serviceProvider.GetService<IWebHelper>();
+                    var webHelper = nopEngine.Resolve<IWebHelper>();
                     if (!webHelper.IsStaticResource())
                     {
                         //get original path and query
@@ -152,12 +152,12 @@ namespace Nop.Web.Framework.Infrastructure.Extensions
 
                         if (DataSettingsManager.IsDatabaseInstalled())
                         {
-                            var commonSettings = serviceProvider.GetService<CommonSettings>();
+                            var commonSettings = nopEngine.Resolve<CommonSettings>();
 
                             if (commonSettings.Log404Errors)
                             {
-                                var logger = serviceProvider.GetService<ILogger>();
-                                var workContext = serviceProvider.GetService<IWorkContext>();
+                                var logger = nopEngine.Resolve<ILogger>();
+                                var workContext = nopEngine.Resolve<IWorkContext>();
 
                                 await logger.ErrorAsync($"Error 404. The requested page ({originalPath}) was not found",
                                     customer: await workContext.GetCurrentCustomerAsync());
@@ -190,13 +190,13 @@ namespace Nop.Web.Framework.Infrastructure.Extensions
         {
             application.UseStatusCodePages(async context =>
             {
-                var serviceProvider = context.HttpContext.RequestServices;
-
                 //handle 400 (Bad request)
                 if (context.HttpContext.Response.StatusCode == StatusCodes.Status400BadRequest)
                 {
-                    var logger = serviceProvider.GetService<ILogger>();
-                    var workContext = serviceProvider.GetService<IWorkContext>();
+                    var nopEngine = EngineContext.Current;
+
+                    var logger = nopEngine.Resolve<ILogger>();
+                    var workContext = nopEngine.Resolve<IWorkContext>();
                     await logger.ErrorAsync("Error 400. Bad request", null, customer: await workContext.GetCurrentCustomerAsync());
                 }
             });
@@ -222,9 +222,7 @@ namespace Nop.Web.Framework.Infrastructure.Extensions
         /// <param name="application">Builder for configuring an application's request pipeline</param>
         public static void UseNopStaticFiles(this IApplicationBuilder application)
         {
-            var serviceProvider = application.ApplicationServices;
-
-            var fileProvider = serviceProvider.GetService<INopFileProvider>();
+            var fileProvider = EngineContext.Current.Resolve<INopFileProvider>();
             var appSettings = Singleton<AppSettings>.Instance;
 
             void staticFileResponse(StaticFileResponseContext context)
