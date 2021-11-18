@@ -47,8 +47,7 @@ namespace Nop.Web.Framework.Infrastructure.Extensions
         /// </summary>
         /// <param name="services">Collection of service descriptors</param>
         /// <param name="builder">A builder for web applications and services</param>
-        /// <returns>Configured engine and app settings</returns>
-        public static (IEngine, AppSettings) ConfigureApplicationServices(this IServiceCollection services,
+        public static void ConfigureApplicationServices(this IServiceCollection services,
             WebApplicationBuilder builder)
         {
             //let the operating system decide what TLS protocol version to use
@@ -85,8 +84,6 @@ namespace Nop.Web.Framework.Infrastructure.Extensions
 
             engine.ConfigureServices(services, builder.Configuration);
             engine.RegisterDependencies(services, appSettings);
-
-            return (engine, appSettings);
         }
 
         /// <summary>
